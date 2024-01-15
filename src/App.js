@@ -26,6 +26,11 @@ function App() {
 
   const handleAdd = () =>{
 
+    if (!tasks.title || !tasks.date) {
+      alert("Please fill in both task and date before adding.");
+      return;
+    }
+
     //Methode 01----
     // const sampleList = [...taskList];
     // sampleList.push(tasks);
@@ -33,12 +38,19 @@ function App() {
 
     //Methode 02----
     setTaskList([...taskList,tasks])
+
+    setTasks({
+      title: "",
+      date: "",
+      status: "",
+      priority: false,
+    })
   }
 
   return (
     <div className="App">
       <div className="h-screen w-auto px-6 bg-blue-100">
-        <div className='flex items-center gap-8'>
+        <div className='flex items-center justify-around'>
           <div className='flex flex-col'>
             <label>Task</label>
             <input 
@@ -75,12 +87,12 @@ function App() {
           </div>
         </div>
 
-        <div className='mt-4'>
+        <div className='mt-4 flex flex-col gap-2'>
           {taskList.map((task,idx)=>(
-            <div key={idx}>
-                <div>{task.title}</div>
-                <div>{task.date}</div>
-                <div>{task.priority}</div>
+            <div key={idx} className='flex w-full gap-3 py-3 px-3 bg-sky-200 rounded items-center'>
+                <div className='text-xl w-[500px]'>{task.title}</div>
+                <div className='text-base w-[100px]'>{task.date}</div>
+                <div>{task.priority ? "🔥" : "🚫"}</div>
             </div>
           ))}
         </div>
