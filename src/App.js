@@ -31,20 +31,27 @@ function App() {
       return;
     }
 
-    //Methode 01----
+    //Method 01----
     // const sampleList = [...taskList];
     // sampleList.push(tasks);
     // setTaskList(sampleList);
 
-    //Methode 02----
+    //Method 02----
     setTaskList([...taskList,tasks])
 
+
+    //clear inputs after adding a task
     setTasks({
       title: "",
       date: "",
       status: "",
       priority: false,
     })
+  }
+
+  const handleDelete = (id) =>{
+    const newList = taskList.filter((task, idx) => idx !== id);
+    setTaskList(newList);
   }
 
   return (
@@ -92,7 +99,10 @@ function App() {
             <div key={idx} className='flex w-full gap-3 py-3 px-3 bg-sky-200 rounded items-center'>
                 <div className='text-xl w-[500px]'>{task.title}</div>
                 <div className='text-base w-[100px]'>{task.date}</div>
-                <div>{task.priority ? "🔥" : "🚫"}</div>
+                <div className='text-base w-[60px]'>{task.priority ? "🔥" : "🚫"}</div>
+                <button className='text-blue-600 font-bold'>Edit</button>
+                <button className='text-red-600 font-bold' 
+                  onClick={()=>handleDelete(idx)}>Delete</button>
             </div>
           ))}
         </div>
