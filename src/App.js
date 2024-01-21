@@ -79,7 +79,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="h-screen w-auto px-6 bg-blue-100">
+      <div className="h-screen w-auto pt-6 px-6 bg-blue-100">
         <div className='flex items-center justify-around'>
           <div className='flex flex-col'>
             <label>Task</label>
