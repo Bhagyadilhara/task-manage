@@ -6,7 +6,7 @@ function App() {
   const [tasks, setTasks] = useState({
     title: "",
     date: "",
-    status: "",
+    status: false,
     priority: false,
   });
 
@@ -64,6 +64,19 @@ function App() {
     setTaskList(newList);
   }
 
+  const handleStatus = (idx) => {
+    const newList = taskList.map((item, index) =>{
+      if(index === idx){
+        return{
+          ...item,
+          status: !item.status,
+        };
+      }
+      return item;
+    });
+    setTaskList(newList);
+  }
+
   return (
     <div className="App">
       <div className="h-screen w-auto px-6 bg-blue-100">
@@ -110,6 +123,7 @@ function App() {
                 <div className='text-xl w-[500px]'>{task.title}</div>
                 <div className='text-base w-[100px]'>{task.date}</div>
                 <div className='text-base w-[60px]'>{task.priority ? "🔥" : "🚫"}</div>
+                <input type='checkbox' onChange={()=>handleStatus(idx)}/>
                 <button className='text-blue-600 font-bold'
                   onClick={()=>handleEdit(task, idx)}>Edit</button>
                 <button className='text-red-600 font-bold' 
