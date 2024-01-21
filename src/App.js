@@ -49,6 +49,16 @@ function App() {
     })
   }
 
+  const handleEdit = (task, id) =>{
+    //console.log(task);
+    const newTask = taskList.filter((task, idx) => idx === id);
+    setTasks(newTask[0]);
+
+    const newList = taskList.filter((_,idx) => idx !== id);
+   
+    setTaskList(newList);
+  }
+
   const handleDelete = (id) =>{
     const newList = taskList.filter((task, idx) => idx !== id);
     setTaskList(newList);
@@ -100,7 +110,8 @@ function App() {
                 <div className='text-xl w-[500px]'>{task.title}</div>
                 <div className='text-base w-[100px]'>{task.date}</div>
                 <div className='text-base w-[60px]'>{task.priority ? "🔥" : "🚫"}</div>
-                <button className='text-blue-600 font-bold'>Edit</button>
+                <button className='text-blue-600 font-bold'
+                  onClick={()=>handleEdit(task, idx)}>Edit</button>
                 <button className='text-red-600 font-bold' 
                   onClick={()=>handleDelete(idx)}>Delete</button>
             </div>
